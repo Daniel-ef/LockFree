@@ -24,8 +24,6 @@ using std::is_trivially_copyable;
 using std::future;
 using std::async;
 using std::array;
-using std::this_thread::sleep_for;
-using std::chrono::microseconds;
 using std::cout;
 using std::cin;
 using std::endl;
@@ -190,23 +188,16 @@ int main(){
 	for (auto i = 0; i < THREAD_COUNT; ++i){
 
 		futures[i] = async([&](){
-
 			int result = 0;
 
 			while (counter < RESULT_COUNT){
 
 				q.enqueue(counter++);
 
+				//throw in some dequeues and store the results
 				while (counter % 2 != 0 && q.dequeue(result)){
-
 					results.enqueue(result);
-
-					//sleeping the threads is totally unnecessary; it just tends to mix up the order of the results a bit
-					sleep_for(microseconds(10));
-
 				}
-
-				sleep_for(microseconds(10));
 			}
 		});
 	}
@@ -218,6 +209,8 @@ int main(){
 
 	}
 
+	//obviously, the results will be all out of order, 
+	//because the threads have been messing around in the queue at the same time
 	auto numberToPrint = 0;
 
 	while (results.dequeue(numberToPrint))	{
