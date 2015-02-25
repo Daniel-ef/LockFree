@@ -7,7 +7,7 @@
 //(note: atomic_compare_exchange_weak would be more performant, but prone to "spurious failure." Also note that std::atomic implements these as member functions as well)
 
 //A C++ production-level implementation of this algorithm in Boost: http://www.boost.org/doc/libs/1_53_0/boost/lockfree/queue.hpp
-//2011 Kogan and Petrank
+//In 2011, Kogan and Petrank expanded on this algorithm to create a ground-breaking "wait-free" queue algorithm (no arbitrarily repeating wait-loops like the while(true) ones you see here)
 
 #include<iostream>
 #include<atomic>
