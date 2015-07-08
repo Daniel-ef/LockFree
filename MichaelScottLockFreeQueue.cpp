@@ -4,10 +4,10 @@
 //http://en.wikipedia.org/wiki/Non-blocking_algorithm - parallel programming without locks
 
 //explanation of what atomic_compare_exchange_strong does (the CAS operation): http://en.wikipedia.org/wiki/Compare-and-swap 
-//(note: atomic_compare_exchange_weak would be more performant, but prone to "spurious failure." Also note that std::atomic implements these as member functions as well)
+//(note: atomic_compare_exchange_weak would be more performant, but prone to "spurious failure." I should've used this for loops.)
 
 //A C++ production-level implementation of this algorithm in Boost: http://www.boost.org/doc/libs/1_53_0/boost/lockfree/queue.hpp
-//In 2011, Kogan and Petrank expanded on this algorithm to create a ground-breaking "wait-free" queue algorithm (no arbitrarily repeating wait-loops like the while(true) ones you see here)
+//In 2011, Kogan and Petrank expanded on this algorithm to create a ground-breaking "wait-free" queue algorithm (no arbitrarily repeating wait-loops like ones you see here)
 
 #include<iostream>
 #include<atomic>
